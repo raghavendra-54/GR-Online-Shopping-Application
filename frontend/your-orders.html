@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Orders</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #EFDEDE, #B2B5FB);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .back-arrow {
+            font-size: 28px;
+            cursor: pointer;
+            color: #333;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .back-arrow:hover {
+            transform: translateX(-5px);
+            color: #B2B5FB;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .order-item {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .order-id {
+            font-weight: bold;
+            color: #333;
+        }
+        .order-status {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .status-placed { background-color: #28a745; color: white; }
+        .status-processing { background-color: #ffc107; color: black; }
+        .status-shipped { background-color: #17a2b8; color: white; }
+        .status-delivered { background-color: #6f42c1; color: white; }
+        .product-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .product-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        .product-details h3 {
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+        .product-details p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .order-total {
+            text-align: right;
+            font-weight: bold;
+            color: #333;
+            font-size: 18px;
+        }
+        .no-orders {
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+            margin: 50px 0;
+        }
+        .loading {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            margin: 50px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-arrow" onclick="window.location.href='p8.html'">&#8592;</div>
+        <h1>Your Orders</h1>
+        
+        <div id="loading" class="loading">Loading your orders...</div>
+        <div id="orders-container"></div>
+        <div id="no-orders" class="no-orders" style="display: none;">
+            You haven't placed any orders yet.
+        </div>
+    </div>
+
+    <script>
+        // Include required services
+        document.write('<script src="js/auth.js"><\/script>');
+        document.write('<script src="js/api.js"><\/script>');
+        
+        // Protect this page - require authentication
+        if (!requireAuth()) {
+            // User not authenticated, redirect handled by requireAuth
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadOrders();
+        });
+
+        async function loadOrders() {
+            const loading = document.getElementById('loading');
+            const ordersContainer = document.getElementById('orders-container');
+            const noOrders = document.getElementById('no-orders');
+
+            try {
+                const orders = await apiService.getOrders();
+                loading.style.display = 'none';
+
+                if (orders.length === 0) {
+                    noOrders.style.display = 'block';
+                    return;
+                }
+
+                orders.forEach(order => {
+                    const orderElement = createOrderElement(order);
+                    ordersContainer.appendChild(orderElement);
+                });
+
+            } catch (error) {
+                console.error('Error loading orders:', error);
+                loading.innerHTML = 'Error loading orders. Please try again.';
+            }
+        }
+
+        function createOrderElement(order) {
+            const orderDiv = document.createElement('div');
+            orderDiv.className = 'order-item';
+
+            const orderDate = new Date(order.orderDate).toLocaleDateString();
+            
+            orderDiv.innerHTML = `
+                <div class="order-header">
+                    <div class="order-id">Order #${order._id.slice(-8)}</div>
+                    <div class="order-status status-${order.status.toLowerCase()}">${order.status}</div>
+                </div>
+                <div class="order-date">Placed on: ${orderDate}</div>
+                <div class="products">
+                    ${order.products.map(product => `
+                        <div class="product-info">
+                            <div class="product-details">
+                                <h3>${product.productId.name}</h3>
+                                <p>Quantity: ${product.quantity}</p>
+                                <p>Price: $${product.productId.price}</p>
+                                ${product.measurements ? '<p>Custom measurements provided</p>' : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="order-total">Total: $${order.totalAmount}</div>
+                <div style="margin-top: 10px; color: #666; font-size: 14px;">
+                    Payment Method: ${order.paymentMethod}
+                </div>
+            `;
+
+            return orderDiv;
+        }
+    </script>
+</body>
+</html>

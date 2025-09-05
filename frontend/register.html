@@ -188,10 +188,18 @@
     </div>
 
  <script>
+  // Include auth service
+  document.write('<script src="js/auth.js"><\/script>');
+  
+  // Check if already authenticated
+  if (redirectIfAuthenticated()) {
+      // User is already logged in, redirect handled by function
+  }
+
   document.getElementById("registrationForm").addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const user = {
+    const userData = {
         firstname: document.getElementById("firstname").value,
         lastname: document.getElementById("lastname").value,
         state: document.getElementById("state").value,
@@ -204,22 +212,29 @@
         alternatePhone: document.getElementById("alternatePhone").value,
         username: document.getElementById("username").value,
         password: document.getElementById("password").value,
-        email: document.getElementById("email").value // Add this line
+        email: document.getElementById("email").value
     };
 
-    try {
-        const response = await fetch('http://localhost:5000/api/auth/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(user),
-        });
+    // Validate required fields
+    for (const [key, value] of Object.entries(userData)) {
+        if (!value || value.trim() === '') {
+            alert(`Please fill in the ${key} field`);
+            return;
+        }
+    }
 
-        const data = await response.json();
-        alert(data.message); // Show the response message
-        window.location.href = "login.html"; // Redirect to login page
+    try {
+        const result = await authService.register(userData);
+
+        if (result.success) {
+            alert(result.data.message);
+            window.location.href = "login.html";
+        } else {
+            alert(result.error);
+        }
     } catch (error) {
         console.error('Error:', error);
-        alert('Error registering user'); // Show an error message
+        alert('An error occurred during registration');
     }
 });
    </script>

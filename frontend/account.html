@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #EFDEDE, #B2B5FB);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .back-arrow {
+            font-size: 28px;
+            cursor: pointer;
+            color: #333;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .back-arrow:hover {
+            transform: translateX(-5px);
+            color: #B2B5FB;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .profile-section {
+            margin-bottom: 30px;
+        }
+        .profile-field {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #B2B5FB;
+        }
+        .profile-field label {
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .profile-field span {
+            color: #666;
+            font-size: 16px;
+        }
+        .edit-btn {
+            background-color: #B2B5FB;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .edit-btn:hover {
+            background-color: #9A9DFA;
+        }
+        .loading {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            margin: 50px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-arrow" onclick="window.location.href='p8.html'">&#8592;</div>
+        <h1>Account Details</h1>
+        
+        <div id="loading" class="loading">Loading account details...</div>
+        <div id="profile-container" style="display: none;">
+            <div class="profile-section">
+                <div class="profile-field">
+                    <label>First Name:</label>
+                    <span id="firstname"></span>
+                </div>
+                <div class="profile-field">
+                    <label>Last Name:</label>
+                    <span id="lastname"></span>
+                </div>
+                <div class="profile-field">
+                    <label>Username:</label>
+                    <span id="username"></span>
+                </div>
+                <div class="profile-field">
+                    <label>Email:</label>
+                    <span id="email"></span>
+                </div>
+                <div class="profile-field">
+                    <label>Phone:</label>
+                    <span id="phone"></span>
+                </div>
+                <div class="profile-field">
+                    <label>Alternate Phone:</label>
+                    <span id="alternatePhone"></span>
+                </div>
+                <div class="profile-field">
+                    <label>Address 1:</label>
+                    <span id="address1"></span>
+                </div>
+                <div class="profile-field">
+                    <label>Address 2:</label>
+                    <span id="address2"></span>
+                </div>
+                <div class="profile-field">
+                    <label>State:</label>
+                    <span id="state"></span>
+                </div>
+                <div class="profile-field">
+                    <label>District:</label>
+                    <span id="district"></span>
+                </div>
+                <div class="profile-field">
+                    <label>Mandal:</label>
+                    <span id="mandal"></span>
+                </div>
+                <div class="profile-field">
+                    <label>Pincode:</label>
+                    <span id="pincode"></span>
+                </div>
+            </div>
+            
+            <button class="edit-btn" onclick="editProfile()">Edit Profile</button>
+        </div>
+    </div>
+
+    <script>
+        // Include required services
+        document.write('<script src="js/auth.js"><\/script>');
+        document.write('<script src="js/api.js"><\/script>');
+        
+        // Protect this page - require authentication
+        if (!requireAuth()) {
+            // User not authenticated, redirect handled by requireAuth
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadProfile();
+        });
+
+        async function loadProfile() {
+            const loading = document.getElementById('loading');
+            const profileContainer = document.getElementById('profile-container');
+
+            try {
+                const profile = await apiService.getUserProfile();
+                loading.style.display = 'none';
+                profileContainer.style.display = 'block';
+
+                // Populate profile fields
+                document.getElementById('firstname').textContent = profile.firstname || 'N/A';
+                document.getElementById('lastname').textContent = profile.lastname || 'N/A';
+                document.getElementById('username').textContent = profile.username || 'N/A';
+                document.getElementById('email').textContent = profile.email || 'N/A';
+                document.getElementById('phone').textContent = profile.phone || 'N/A';
+                document.getElementById('alternatePhone').textContent = profile.alternatePhone || 'N/A';
+                document.getElementById('address1').textContent = profile.address1 || 'N/A';
+                document.getElementById('address2').textContent = profile.address2 || 'N/A';
+                document.getElementById('state').textContent = profile.state || 'N/A';
+                document.getElementById('district').textContent = profile.district || 'N/A';
+                document.getElementById('mandal').textContent = profile.mandal || 'N/A';
+                document.getElementById('pincode').textContent = profile.pincode || 'N/A';
+
+            } catch (error) {
+                console.error('Error loading profile:', error);
+                loading.innerHTML = 'Error loading profile. Please try again.';
+            }
+        }
+
+        function editProfile() {
+            alert('Profile editing functionality would be implemented here. For now, you can create a new account with updated information.');
+        }
+    </script>
+</body>
+</html>

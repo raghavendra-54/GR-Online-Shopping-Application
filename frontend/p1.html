@@ -191,6 +191,15 @@
     </div>
 
     <script>
+        // Include required services
+        document.write('<script src="js/auth.js"><\/script>');
+        document.write('<script src="js/api.js"><\/script>');
+        
+        // Protect this page - require authentication
+        if (!requireAuth()) {
+            // User not authenticated, redirect handled by requireAuth
+        }
+
         // Function to filter rectangle items based on search input
         function filterItems() {
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
@@ -205,6 +214,14 @@
                 }
             });
         }
+        
+        // Load user info on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = authService.getCurrentUser();
+            if (user) {
+                console.log('Welcome,', user.firstname, user.lastname);
+            }
+        });
     </script>
 </body>
 </html>

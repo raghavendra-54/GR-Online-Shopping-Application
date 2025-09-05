@@ -88,6 +88,15 @@
         }
     </style>
     <script>
+        // Include required services
+        document.write('<script src="js/auth.js"><\/script>');
+        document.write('<script src="js/api.js"><\/script>');
+        
+        // Protect this page - require authentication
+        if (!requireAuth()) {
+            // User not authenticated, redirect handled by requireAuth
+        }
+        
         document.addEventListener('DOMContentLoaded', function () {
             // Add event listener to the back arrow
             var backButton = document.querySelector('.back-arrow');
@@ -98,7 +107,8 @@
             // Add event listener to the Buy Now button
             var buyNowButton = document.querySelector('.button');
             buyNowButton.addEventListener('click', function () {
-                window.location.href = 'p6.html';
+                // Save measurements before proceeding
+                saveMeasurements();
             });
 
             // Automatically move to the next input box on Enter key press
@@ -114,6 +124,31 @@
                 });
             });
         });
+        
+        function saveMeasurements() {
+            const inputs = document.querySelectorAll('.box input');
+            const measurements = {};
+            const measurementLabels = [
+                'chest', 'waist', 'shoulder', 'armLength', 'neckSize', 'bicep', 'wrist',
+                'shirtLength', 'pantWaist', 'pantLength', 'thigh', 'knee', 'ankle', 'rise'
+            ];
+            
+            inputs.forEach((input, index) => {
+                if (measurementLabels[index]) {
+                    measurements[measurementLabels[index]] = input.value;
+                }
+            });
+            
+            // Validate that all measurements are filled
+            const emptyFields = Object.entries(measurements).filter(([key, value]) => !value || value.trim() === '');
+            if (emptyFields.length > 0) {
+                alert('Please fill in all measurement fields');
+                return;
+            }
+            
+            localStorage.setItem('measurements', JSON.stringify(measurements));
+            window.location.href = 'p6.html';
+        }
     </script>
 </head>
 <body>

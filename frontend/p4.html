@@ -91,6 +91,56 @@
 </head>
 <body>
 
+    <script>
+        // Include required services
+        document.write('<script src="js/auth.js"><\/script>');
+        document.write('<script src="js/api.js"><\/script>');
+        
+        // Protect this page - require authentication
+        if (!requireAuth()) {
+            // User not authenticated, redirect handled by requireAuth
+        }
+        
+        // Load product details
+        document.addEventListener('DOMContentLoaded', function() {
+            const product = JSON.parse(localStorage.getItem('selectedProduct') || '{}');
+            
+            if (product.name) {
+                // Update product details
+                const productName = document.querySelector('.square p strong');
+                const productPrice = document.querySelector('.square p:nth-child(3)');
+                const productDiscount = document.querySelector('.square p:nth-child(2)');
+                
+                if (productName) productName.textContent = product.name;
+                if (productPrice) productPrice.innerHTML = `<strong>$${product.price}</strong>`;
+                if (productDiscount && product.discount > 0) {
+                    productDiscount.textContent = `${product.discount}% Discount with HDFC Bank.`;
+                } else if (productDiscount) {
+                    productDiscount.style.display = 'none';
+                }
+            }
+        });
+        
+        // Add to cart functionality
+        async function addToCart() {
+            const product = JSON.parse(localStorage.getItem('selectedProduct') || '{}');
+            
+            if (!product._id) {
+                alert('Product not found');
+                return;
+            }
+            
+            try {
+                await apiService.addToCart(product._id, 1);
+                alert('Product added to cart successfully!');
+                window.location.href = 'p9.html';
+            } catch (error) {
+                console.error('Add to cart error:', error);
+                alert('Failed to add product to cart');
+            }
+        }
+    </script>
+
     <div class="container">
         <!-- Backward Arrow -->
         <div class="backward-arrow" onclick="window.location.href='p3.html'">&#8592;</div>
@@ -111,7 +161,7 @@
             <!-- Buttons -->
             <div class="buttons">
                 <button class="button measurements" onclick="window.location.href='p5.html'">Measurements</button>
-                <button class="button" onclick="window.location.href='p9.html'">Add to Cart</button>
+                <button class="button" onclick="addToCart()">Add to Cart</button>
             </div>
         </div>
     </div>

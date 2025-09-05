@@ -120,31 +120,38 @@
     </div>
 
     <script>
+        // Include auth service
+        document.write('<script src="js/auth.js"><\/script>');
+        
+        // Check if already authenticated
+        if (redirectIfAuthenticated()) {
+            // User is already logged in, redirect handled by function
+        }
+
         // Form Submission Handling
         document.querySelector(".login-form").addEventListener("submit", async (event) => {
             event.preventDefault();
 
-            const user = {
-                username: document.getElementById("username").value,
-                password: document.getElementById("password").value,
-            };
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (!username || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
 
             try {
-                const response = await fetch('http://localhost:5000/api/auth/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(user),
-                });
-
-                const data = await response.json();
-                if (response.ok) {
-                    alert(data.message);
-                    window.location.href = "p1.html"; // Redirect to the next page
+                const result = await authService.login(username, password);
+                
+                if (result.success) {
+                    alert(result.data.message);
+                    window.location.href = "p1.html";
                 } else {
-                    alert(data.error);
+                    alert(result.error);
                 }
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Login error:', error);
+                alert('An error occurred during login');
             }
         });
     </script>

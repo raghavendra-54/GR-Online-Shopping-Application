@@ -94,6 +94,15 @@
         }
     </style>
     <script>
+        // Include required services
+        document.write('<script src="js/auth.js"><\/script>');
+        document.write('<script src="js/api.js"><\/script>');
+        
+        // Protect this page - require authentication
+        if (!requireAuth()) {
+            // User not authenticated, redirect handled by requireAuth
+        }
+        
         document.addEventListener('DOMContentLoaded', function () {
             // Add event listener to the back arrow
             var backButton = document.querySelector('.back-arrow');
@@ -104,19 +113,71 @@
             // Add event listeners to payment buttons
             var cashOnDeliveryButton = document.querySelector('#cash-on-delivery');
             cashOnDeliveryButton.addEventListener('click', function () {
-                window.location.href = 'p7.html';
+                processOrder('Cash on Delivery');
             });
 
             var creditDebitButton = document.querySelector('#credit-debit');
             creditDebitButton.addEventListener('click', function () {
-                window.location.href = 'p8.html';
+                processOrder('Credit/Debit Card');
             });
 
             var upiAppsButton = document.querySelector('#upi-apps');
             upiAppsButton.addEventListener('click', function () {
-                window.location.href = 'p9.html';
+                processOrder('UPI');
             });
         });
+        
+        async function processOrder(paymentMethod) {
+            // Validate delivery address
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const pincode = document.getElementById('pincode').value;
+            const address = document.getElementById('address').value;
+            
+            if (!name || !phone || !pincode || !address) {
+                alert('Please fill in all delivery address fields');
+                return;
+            }
+            
+            // Get product and measurements from localStorage
+            const product = JSON.parse(localStorage.getItem('selectedProduct') || '{}');
+            const measurements = JSON.parse(localStorage.getItem('measurements') || '{}');
+            
+            if (!product._id) {
+                alert('Product not found');
+                return;
+            }
+            
+            const orderData = {
+                products: [{
+                    productId: product._id,
+                    quantity: 1,
+                    measurements: measurements
+                }],
+                deliveryAddress: {
+                    name: name,
+                    phone: phone,
+                    pincode: pincode,
+                    address: address
+                },
+                paymentMethod: paymentMethod,
+                totalAmount: product.price + (product.deliveryCharge || 3)
+            };
+            
+            try {
+                const result = await apiService.createOrder(orderData);
+                
+                // Clear stored data
+                localStorage.removeItem('selectedProduct');
+                localStorage.removeItem('measurements');
+                
+                // Redirect to success page
+                window.location.href = 'p7.html';
+            } catch (error) {
+                console.error('Order creation error:', error);
+                alert('Failed to place order. Please try again.');
+            }
+        }
     </script>
 </head>
 <body>

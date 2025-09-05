@@ -134,6 +134,15 @@
     </div>
 
     <script>
+        // Include required services
+        document.write('<script src="js/auth.js"><\/script>');
+        document.write('<script src="js/api.js"><\/script>');
+        
+        // Protect this page - require authentication
+        if (!requireAuth()) {
+            // User not authenticated, redirect handled by requireAuth
+        }
+
         // JavaScript for Search Functionality
         const searchInput = document.getElementById('searchInput');
         const content = document.getElementById('content');
@@ -150,6 +159,45 @@
                     square.classList.add('hidden'); // Hide non-matching items
                 }
             });
+        });
+        
+        // Load products from API
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                const products = await apiService.getProducts({ 
+                    category: "men's wear", 
+                    subcategory: "tailoring" 
+                });
+                
+                // Update the squares with real product data
+                const squares = document.querySelectorAll('.square');
+                products.forEach((product, index) => {
+                    if (squares[index]) {
+                        const square = squares[index];
+                        square.setAttribute('data-name', product.name.toLowerCase());
+                        
+                        const img = square.querySelector('img');
+                        const p = square.querySelector('p');
+                        
+                        if (img) img.alt = product.name;
+                        if (p) {
+                            let priceText = `$${product.price}`;
+                            if (product.discount > 0) {
+                                priceText = `${product.discount}% Discount with HDFC Bank.<br>${priceText}`;
+                            }
+                            p.innerHTML = `${product.name}.<br>${priceText}`;
+                        }
+                        
+                        // Update click handler to pass product ID
+                        square.onclick = function() {
+                            localStorage.setItem('selectedProduct', JSON.stringify(product));
+                            window.location.href = 'p4.html';
+                        };
+                    }
+                });
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
         });
     </script>
 

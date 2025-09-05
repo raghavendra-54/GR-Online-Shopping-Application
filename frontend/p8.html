@@ -90,12 +90,41 @@
         }
     </style>
     <script>
+        // Include required services
+        document.write('<script src="js/auth.js"><\/script>');
+        document.write('<script src="js/api.js"><\/script>');
+        
+        // Protect this page - require authentication
+        if (!requireAuth()) {
+            // User not authenticated, redirect handled by requireAuth
+        }
+        
         function navigateTo(page) {
             window.location.href = page;
         }
 
         function navigateBack() {
             window.location.href = 'p1.html';
+        }
+        
+        // Load user profile info
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                const user = authService.getCurrentUser();
+                if (user) {
+                    // You can update the UI with user info here
+                    console.log('User profile loaded:', user);
+                }
+            } catch (error) {
+                console.error('Error loading user profile:', error);
+            }
+        });
+        
+        // Handle logout
+        function handleLogout() {
+            if (confirm('Are you sure you want to log out?')) {
+                authService.logout();
+            }
         }
     </script>
 </head>
