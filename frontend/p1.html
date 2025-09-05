@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Page</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .header .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: #6a11cb;
+            transition: color 0.3s ease;
+        }
+
+        .header .menu-icon:hover {
+            color: #2575fc;
+        }
+
+        .search-bar {
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color: #6a11cb;
+            outline: none;
+            box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+        }
+
+        /* Content */
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Rectangle Items */
+        .rectangle {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .rectangle:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .rectangle img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+
+        .rectangle p {
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+            color: #555;
+            flex: 1;
+        }
+
+        .rectangle-arrow {
+            font-size: 24px;
+            color: #6a11cb;
+            transition: color 0.3s ease;
+        }
+
+        .rectangle:hover .rectangle-arrow {
+            color: #2575fc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .header .menu-icon {
+                margin-bottom: 10px;
+            }
+
+            .rectangle img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .rectangle p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="menu-icon" onclick="window.location.href='p8.html'">&#9776;</div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search..." oninput="filterItems()">
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content" id="content">
+            <div class="rectangle" data-name="men's wear" onclick="window.location.href='file:///C:/Users/Raghavendra/OneDrive/Documents/project/frontend/p2.html'">
+                <img src="C:\Users\Raghavendra\OneDrive\Pictures\Screenshots\Screenshot 2025-02-08 231758.png" alt="Men's Wear">
+                <p>Men's Wear</p>
+                <div class="rectangle-arrow">&#10148;</div>
+            </div>
+            <div class="rectangle" data-name="women's wear" onclick="window.location.href='new_page.html'">
+                <img src="C:\Users\Raghavendra\OneDrive\Pictures\Screenshots\Screenshot 2025-02-08 232132.png" alt="Women's Wear">
+                <p>Women's Wear</p>
+                <div class="rectangle-arrow">&#10148;</div>
+            </div>
+            <div class="rectangle" data-name="kid's wear" onclick="window.location.href='new_page.html'">
+                <img src="C:\Users\Raghavendra\OneDrive\Pictures\kidswear.webp" alt="Kid's Wear">
+                <p>Kid's Wear</p>
+                <div class="rectangle-arrow">&#10148;</div>
+            </div>
+            <div class="rectangle" data-name="electronics" onclick="window.location.href='new_page.html'">
+                <img src="C:\Users\Raghavendra\OneDrive\Pictures\electronics.webp" alt="Electronics">
+                <p>Electronics</p>
+                <div class="rectangle-arrow">&#10148;</div>
+            </div>
+            <!-- Add more rectangles here -->
+        </div>
+    </div>
+
+    <script>
+        // Function to filter rectangle items based on search input
+        function filterItems() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const rectangles = document.querySelectorAll('.rectangle');
+
+            rectangles.forEach(rectangle => {
+                const itemName = rectangle.getAttribute('data-name').toLowerCase();
+                if (itemName.includes(searchInput)) {
+                    rectangle.style.display = 'flex'; // Show matching items
+                } else {
+                    rectangle.style.display = 'none'; // Hide non-matching items
+                }
+            });
+        }
+    </script>
+</body>
+</html>

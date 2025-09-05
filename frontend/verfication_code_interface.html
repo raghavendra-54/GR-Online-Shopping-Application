@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Code</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Verification Container */
+        .verification-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Page Heading */
+        .page-heading {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #6a11cb;
+        }
+
+        /* OTP Boxes */
+        .otp-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .otp-box {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 24px;
+            transition: border-color 0.3s ease;
+        }
+
+        .otp-box:focus {
+            border-color: #6a11cb;
+            outline: none;
+        }
+
+        .otp-box.filled {
+            border-color: #28a745;
+        }
+
+        /* Verification Code Text */
+        .verification-code {
+            margin: 20px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Verify Button */
+        .button {
+            background: #6a11cb;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .button:hover {
+            background: #2575fc;
+            transform: translateY(-2px);
+        }
+
+        /* Avatar Image */
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 20px auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .otp-box {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .page-heading {
+                font-size: 20px;
+            }
+
+            .verification-code {
+                font-size: 14px;
+            }
+
+            .button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="verification-container">
+        <div class="page-heading">Verification Code</div>
+        <div class="otp-container">
+            <input type="text" class="otp-box" maxlength="1" oninput="moveToNext(this, 1)" onkeypress="return isNumber(event)">
+            <input type="text" class="otp-box" maxlength="1" oninput="moveToNext(this, 2)" onkeypress="return isNumber(event)">
+            <input type="text" class="otp-box" maxlength="1" oninput="moveToNext(this, 3)" onkeypress="return isNumber(event)">
+            <input type="text" class="otp-box" maxlength="1" oninput="moveToNext(this, 4)" onkeypress="return isNumber(event)">
+        </div>
+        <p class="verification-code">Enter the verification code received:</p>
+        <button class="button" id="verifyBtn">Verify</button>
+        <img src="C:\Users\Raghavendra\OneDrive\Pictures\VERIFICATION.png" alt="Avatar" class="avatar">
+    </div>
+
+    <script>
+        // Function to allow only numbers in OTP boxes
+        function isNumber(event) {
+            const charCode = event.which ? event.which : event.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
+
+        // Function to move to the next OTP box
+        function moveToNext(current, next) {
+            if (current.value.length === 1) {
+                const nextBox = document.querySelector(`.otp-box:nth-child(${next + 1})`);
+                if (nextBox) nextBox.focus();
+            }
+            checkOTP();
+        }
+
+        // Function to check if all OTP boxes are filled
+        function checkOTP() {
+            const otpBoxes = document.querySelectorAll('.otp-box');
+            let allFilled = true;
+            otpBoxes.forEach(box => {
+                if (box.value === '') allFilled = false;
+                box.classList.toggle('filled', box.value !== '');
+            });
+        }
+
+        // Function to handle verification
+        document.getElementById("verifyBtn").addEventListener("click", function() {
+            const otpBoxes = document.querySelectorAll('.otp-box');
+            let otp = '';
+            otpBoxes.forEach(box => otp += box.value);
+            if (otp.length === 4) {
+                alert("Verification successful! Redirecting to the home page...");
+                window.location.href = "p1.html";
+            } else {
+                alert("Please enter the complete OTP.");
+            }
+        });
+    </script>
+</body>
+</html>

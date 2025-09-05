@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Measurements Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f8f8; /* Light gray background */
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff; /* White background for the container */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .back-arrow {
+            font-size: 24px;
+            cursor: pointer;
+            color: #333; /* Dark gray color */
+            margin-bottom: 20px; /* Spacing below the arrow */
+            display: inline-block; /* Aligns the arrow properly */
+        }
+        .back-arrow:hover {
+            color: #007bff; /* Blue color on hover */
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333; /* Dark gray color */
+        }
+        .square {
+            width: 50%; /* Adjust image width */
+            margin: 0 auto 20px; /* Center image and add space below */
+        }
+        .square img {
+            width: 100%;
+            border-radius: 12px; /* Rounded corners for image */
+        }
+        .box-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow boxes to wrap */
+            justify-content: center; /* Center-align boxes */
+            gap: 10px; /* Space between boxes */
+            margin-top: 20px; /* Add space between image and boxes */
+        }
+        .box {
+            width: calc(25% - 20px); /* 25% width with space between */
+            padding: 15px;
+            background-color: #f1f1f1; /* Light gray background for boxes */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+            text-align: center; /* Center-align text */
+        }
+        .box input {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            text-align: center;
+            font-size: 16px;
+            margin-top: 10px; /* Space between number and input */
+        }
+        .box input:focus {
+            border-bottom: 2px solid #007bff; /* Blue underline on focus */
+        }
+        .button-container {
+            margin-top: 20px; /* Add space above button */
+        }
+        .button {
+            background-color: #007bff; /* Blue button color */
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add event listener to the back arrow
+            var backButton = document.querySelector('.back-arrow');
+            backButton.addEventListener('click', function () {
+                window.location.href = 'p4.html';
+            });
+
+            // Add event listener to the Buy Now button
+            var buyNowButton = document.querySelector('.button');
+            buyNowButton.addEventListener('click', function () {
+                window.location.href = 'p6.html';
+            });
+
+            // Automatically move to the next input box on Enter key press
+            const inputs = document.querySelectorAll('.box input');
+            inputs.forEach((input, index) => {
+                input.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter') { // Check if Enter key is pressed
+                        event.preventDefault(); // Prevent form submission
+                        if (index < inputs.length - 1) {
+                            inputs[index + 1].focus(); // Move to the next input
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Back Arrow -->
+        <div class="back-arrow" onclick="window.location.href='p4.html'">&#8592;</div>
+
+        <!-- Page Title -->
+        <h2>Measurements</h2>
+
+        <!-- Image -->
+        <div class="square">
+            <img src="C:\Users\Raghavendra\Downloads\sizechart.png" alt="Size Chart">
+        </div>
+
+        <!-- 14 Boxes with Input Fields -->
+        <div class="box-container">
+            <div class="box">1<br><input type="text" maxlength="4"></div>
+            <div class="box">2<br><input type="text" maxlength="4"></div>
+            <div class="box">3<br><input type="text" maxlength="4"></div>
+            <div class="box">4<br><input type="text" maxlength="4"></div>
+            <div class="box">5<br><input type="text" maxlength="4"></div>
+            <div class="box">6<br><input type="text" maxlength="4"></div>
+            <div class="box">7<br><input type="text" maxlength="4"></div>
+            <div class="box">8<br><input type="text" maxlength="4"></div>
+            <div class="box">9<br><input type="text" maxlength="4"></div>
+            <div class="box">10<br><input type="text" maxlength="4"></div>
+            <div class="box">11<br><input type="text" maxlength="4"></div>
+            <div class="box">12<br><input type="text" maxlength="4"></div>
+            <div class="box">13<br><input type="text" maxlength="4"></div>
+            <div class="box">14<br><input type="text" maxlength="4"></div>
+        </div>
+
+        <!-- Buy Now Button -->
+        <div class="button-container">
+            <button class="button">Buy Now</button>
+        </div>
+    </div>
+
+</body>
+</html>

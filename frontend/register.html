@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        /* Your existing CSS styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .registration-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .page-heading {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #6a11cb;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .form-group input:focus {
+            border-color: #6a11cb;
+            outline: none;
+            box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+        }
+        .form-row {
+            display: flex;
+            gap: 10px;
+        }
+        .form-row .half-width {
+            width: 48%;
+        }
+        .form-group button {
+            background: #6a11cb;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .form-group button:hover {
+            background: #2575fc;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+            }
+            .form-row .half-width {
+                width: 100%;
+            }
+            .registration-container {
+                padding: 20px;
+            }
+            .page-heading {
+                font-size: 20px;
+            }
+            .form-group input {
+                font-size: 14px;
+                padding: 10px;
+            }
+            .form-group button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <div class="page-heading">Register</div>
+        <form id="registrationForm">
+            <!-- Firstname -->
+            <div class="form-group">
+                <label for="firstname">Firstname:</label>
+                <input type="text" id="firstname" name="firstname" required>
+            </div>
+
+            <!-- Lastname -->
+            <div class="form-group">
+                <label for="lastname">Lastname:</label>
+                <input type="text" id="lastname" name="lastname" required>
+            </div>
+
+            <!-- State and District -->
+            <div class="form-group form-row">
+                <div class="half-width">
+                    <label for="state">State:</label>
+                    <input type="text" id="state" name="state" required>
+                </div>
+                <div class="half-width">
+                    <label for="district">District:</label>
+                    <input type="text" id="district" name="district" required>
+                </div>
+            </div>
+
+            <!-- Mandal and Pincode -->
+            <div class="form-group form-row">
+                <div class="half-width">
+                    <label for="mandal">Mandal:</label>
+                    <input type="text" id="mandal" name="mandal" required>
+                </div>
+                <div class="half-width">
+                    <label for="pincode">Pincode:</label>
+                    <input type="text" id="pincode" name="pincode" required>
+                </div>
+            </div>
+
+            <!-- Address1 and Address2 -->
+            <div class="form-group">
+                <label for="address1">Address1:</label>
+                <input type="text" id="address1" name="address1" required>
+            </div>
+            <div class="form-group">
+                <label for="address2">Address2:</label>
+                <input type="text" id="address2" name="address2" required>
+            </div>
+
+            <!-- Phone and Alternate Phone -->
+            <div class="form-group">
+                <label for="phone">Phone no:</label>
+                <input type="text" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="alternatePhone">Alternate phone no:</label>
+                <input type="text" id="alternatePhone" name="alternatePhone" required>
+            </div>
+	    <div class="form-group">
+    	    	<label for="email">Email:</label>
+            	<input type="email" id="email" name="email" required>
+            </div>
+	<div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+
+    <!-- Add Password Field -->
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+ <script>
+  document.getElementById("registrationForm").addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const user = {
+        firstname: document.getElementById("firstname").value,
+        lastname: document.getElementById("lastname").value,
+        state: document.getElementById("state").value,
+        district: document.getElementById("district").value,
+        mandal: document.getElementById("mandal").value,
+        pincode: document.getElementById("pincode").value,
+        address1: document.getElementById("address1").value,
+        address2: document.getElementById("address2").value,
+        phone: document.getElementById("phone").value,
+        alternatePhone: document.getElementById("alternatePhone").value,
+        username: document.getElementById("username").value,
+        password: document.getElementById("password").value,
+        email: document.getElementById("email").value // Add this line
+    };
+
+    try {
+        const response = await fetch('http://localhost:5000/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user),
+        });
+
+        const data = await response.json();
+        alert(data.message); // Show the response message
+        window.location.href = "login.html"; // Redirect to login page
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error registering user'); // Show an error message
+    }
+});
+   </script>
+
+</body>
+</html>

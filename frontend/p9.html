@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #EFDEDE, #B2B5FB);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px;
+            background-color: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .back-arrow {
+            font-size: 28px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #333;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .back-arrow:hover {
+            transform: translateX(-5px);
+            color: #B2B5FB;
+        }
+        .button {
+            background-color: #D9D9D9;
+            color: black;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 300px;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .button:hover {
+            background-color: #C0C0C0;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+       
+        
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var backButton = document.querySelector('.back-arrow');
+            backButton.addEventListener('click', function() {
+                navigateTo('p1.html');
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <div class="back-arrow">&#8592;</div>
+    <div class="container">
+        <button class="button primary" onclick="navigateTo('offers.html')">Offers</button>
+        <button class="button" onclick="navigateTo('check-your-cart.html')">Check Your Cart</button>
+        <button class="button" onclick="navigateTo('refer-and-earn-coins.html')">Refer & Earn Coins</button>
+    </div>
+
+</body>
+</html>

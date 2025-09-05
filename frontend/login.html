@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        /* Your existing CSS styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .marquee-text {
+            color: red;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: slide 10s linear infinite;
+        }
+        @keyframes slide {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .login-container img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus {
+            border-color: #6a11cb;
+            outline: none;
+        }
+        .form-group .additional-info {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        .form-group .additional-info a {
+            color: #6a11cb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 12px;
+            background: #6a11cb;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .form-group button:hover {
+            background: #2575fc;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Shopping Image -->
+        <div class="marquee-text">
+            **Welcome to Rudra Shopping**
+        </div>
+        <img src="C:\Users\Raghavendra\OneDrive\Pictures\SR.jpg" alt="Shopping Image">
+        <form class="login-form">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <p class="additional-info">
+                    <a href="forgot_password.html">Forgot Password?</a> | <a href="register.html">Register</a>
+                </p>
+            </div>
+            <div class="form-group">
+                <button type="submit">Enter</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Form Submission Handling
+        document.querySelector(".login-form").addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const user = {
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value,
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(user),
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert(data.message);
+                    window.location.href = "p1.html"; // Redirect to the next page
+                } else {
+                    alert(data.error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>

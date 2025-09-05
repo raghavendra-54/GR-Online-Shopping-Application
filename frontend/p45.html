@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8; /* Light gray background */
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff; /* White background for the container */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: left; /* Align text to the left */
+        }
+        .backward-arrow {
+            font-size: 24px;
+            cursor: pointer;
+            color: #333; /* Dark gray color */
+            margin-bottom: 20px; /* Spacing below the arrow */
+            display: inline-block; /* Aligns the arrow properly */
+        }
+        .backward-arrow:hover {
+            color: #007bff; /* Blue color on hover */
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .square {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .square img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 20px; /* Spacing below image */
+        }
+        .square p {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+        .square p.delivery {
+            color: #28a745; /* Green color for delivery text */
+            font-weight: bold;
+        }
+        .square p.charge {
+            color: #dc3545; /* Red color for delivery charge */
+            font-weight: bold;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between; /* Space between buttons */
+            gap: 10px; /* Gap between buttons */
+        }
+        .button {
+            background-color: #007bff; /* Blue button color */
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            flex: 1; /* Equal width for buttons */
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .button.measurements {
+            background-color: #6c757d; /* Gray button color */
+        }
+        .button.measurements:hover {
+            background-color: #5a6268; /* Darker gray on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Backward Arrow -->
+        <div class="backward-arrow" onclick="window.location.href='p3.html'">&#8592;</div>
+
+        <!-- Product Content -->
+        <div class="content">
+            <div class="square">
+                <!-- Product Image -->
+                <img src="C:\Users\Raghavendra\Downloads\2-2.png" alt="Product Image">
+                <!-- Product Details -->
+                <p><strong>SMENS - silera camel color fabric piece.</strong></p>
+                <p><strong>$250</strong></p>
+                <p class="delivery">4-5 DAYS DELIVERY.</p>
+                <p class="charge">*Delivery Charge: $3.</p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="buttons">
+                <button class="button measurements" onclick="window.location.href='p5.html'">Measurements</button>
+                <button class="button" onclick="window.location.href='p9.html'">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

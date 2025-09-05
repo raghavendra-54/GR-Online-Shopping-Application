@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Page</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .header .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: #6a11cb;
+            transition: color 0.3s ease;
+        }
+
+        .header .menu-icon:hover {
+            color: #2575fc;
+        }
+
+        .search-bar {
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color: #6a11cb;
+            outline: none;
+            box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+        }
+
+        /* Grid Container */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-item {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .grid-item p {
+            padding: 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #555;
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .header .menu-icon {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="menu-icon" onclick="window.location.href='p9.html'">&#9776;</div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search..." oninput="filterItems()">
+            </div>
+        </div>
+
+        <!-- Grid Container -->
+        <div class="grid-container" id="gridContainer">
+            <div class="grid-item" data-name="tailoring" onclick="window.location.href='p3.html'">
+                <img src="C:\Users\Raghavendra\OneDrive\Pictures\tailoring.jpg" alt="Tailoring">
+                <p>Tailoring</p>
+            </div>
+            <div class="grid-item" data-name="shirts" onclick="window.location.href='second_page.html'">
+                <img src="C:\Users\Raghavendra\OneDrive\Pictures\shirts.jpg" alt="Shirts">
+                <p>Shirts</p>
+            </div>
+            <div class="grid-item" data-name="pants" onclick="window.location.href='second_page.html'">
+                <img src="C:\Users\Raghavendra\OneDrive\Pictures\pants.jpg" alt="Pants">
+                <p>Pants</p>
+            </div>
+            <div class="grid-item" data-name="nightwear-pants" onclick="window.location.href='second_page.html'">
+                <img src="C:\Users\Raghavendra\OneDrive\Pictures\n-pants.webp" alt="Nightwear-Pants">
+                <p>Nightwear-Pants</p>
+            </div>
+            <div class="grid-item" data-name="t-shirts" onclick="window.location.href='second_page.html'">
+                <img src="C:\Users\Raghavendra\OneDrive\Pictures\t-shirts.jpg" alt="T-Shirts">
+                <p>T-Shirts</p>
+            </div>
+            <div class="grid-item" data-name="shorts" onclick="window.location.href='second_page.html'">
+                <img src="C:\Users\Raghavendra\OneDrive\Pictures\shorts.jpeg" alt="Shorts">
+                <p>Shorts</p>
+            </div>
+            <div class="grid-item" data-name="Inner wears" onclick="window.location.href='second_page.html'">
+                <img src="C:\Users\Raghavendra\OneDrive\Pictures\innerwear.jpeg" alt="Inner wears">
+                <p>Inner wears</p>
+            </div>
+            <div class="grid-item" data-name="shoes" onclick="window.location.href='second_page.html'">
+                <img src="C:\Users\Raghavendra\OneDrive\Pictures\shoes.avif" alt="Shoes">
+                <p>Shoes</p>
+            </div>
+            <div class="grid-item" data-name="jewellery" onclick="window.location.href='second_page.html'">
+                <img src="C:\Users\Raghavendra\OneDrive\Pictures\Mens-jewellery.png" alt="Jewellery">
+                <p>Jewellery</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to filter grid items based on search input
+        function filterItems() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const gridItems = document.querySelectorAll('.grid-item');
+
+            gridItems.forEach(item => {
+                const itemName = item.getAttribute('data-name').toLowerCase();
+                if (itemName.includes(searchInput)) {
+                    item.style.display = 'block'; // Show matching items
+                } else {
+                    item.style.display = 'none'; // Hide non-matching items
+                }
+            });
+        }
+    </script>
+</body>
+</html>

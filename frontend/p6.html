@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address & Payment Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f8f8; /* Light gray background */
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff; /* White background for the container */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: left; /* Left-align text */
+        }
+        .back-arrow {
+            font-size: 24px;
+            cursor: pointer;
+            color: #333; /* Dark gray color */
+            margin-bottom: 20px; /* Spacing below the arrow */
+            display: inline-block; /* Aligns the arrow properly */
+        }
+        .back-arrow:hover {
+            color: #007bff; /* Blue color on hover */
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333; /* Dark gray color */
+        }
+        h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #333; /* Dark gray color */
+        }
+        .input-group {
+            margin-bottom: 15px; /* Space between input groups */
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555; /* Dark gray color */
+        }
+        .input-group input,
+        .input-group textarea {
+            width: calc(100% - 20px); /* Full width with padding */
+            padding: 10px;
+            border: 1px solid #ddd; /* Light gray border */
+            border-radius: 8px; /* Rounded corners */
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .input-group input:focus,
+        .input-group textarea:focus {
+            border-color: #007bff; /* Blue border on focus */
+        }
+        .input-group textarea {
+            resize: vertical; /* Allow vertical resizing */
+            height: 100px; /* Initial height of textarea */
+        }
+        .button {
+            background-color: #007bff; /* Blue button color */
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%; /* Full width of container */
+            margin-top: 10px; /* Space above button */
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .payment-options {
+            margin-top: 20px; /* Space above payment options */
+        }
+        .payment-options .button {
+            background-color: #6c757d; /* Gray button color */
+            margin-bottom: 10px; /* Space between buttons */
+        }
+        .payment-options .button:hover {
+            background-color: blue; /* Darker gray on hover */
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add event listener to the back arrow
+            var backButton = document.querySelector('.back-arrow');
+            backButton.addEventListener('click', function () {
+                window.location.href = 'p5.html';
+            });
+
+            // Add event listeners to payment buttons
+            var cashOnDeliveryButton = document.querySelector('#cash-on-delivery');
+            cashOnDeliveryButton.addEventListener('click', function () {
+                window.location.href = 'p7.html';
+            });
+
+            var creditDebitButton = document.querySelector('#credit-debit');
+            creditDebitButton.addEventListener('click', function () {
+                window.location.href = 'p8.html';
+            });
+
+            var upiAppsButton = document.querySelector('#upi-apps');
+            upiAppsButton.addEventListener('click', function () {
+                window.location.href = 'p9.html';
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Back Arrow -->
+        <div class="back-arrow" onclick="window.location.href='p5.html'">&#8592;</div>
+
+        <!-- Page Title -->
+        <h2>Delivery Address</h2>
+
+        <!-- Name Field -->
+        <div class="input-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Enter your full name">
+        </div>
+
+        <!-- Phone Number Field -->
+        <div class="input-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="Enter your phone number">
+        </div>
+
+        <!-- Pincode Field -->
+        <div class="input-group">
+            <label for="pincode">Pincode</label>
+            <input type="text" id="pincode" placeholder="Enter your pincode">
+        </div>
+
+        <!-- Delivery Address Field -->
+        <div class="input-group">
+            <label for="address">Delivery Address</label>
+            <textarea id="address" placeholder="Enter your delivery address..."></textarea>
+        </div>
+
+        <!-- Payment Options -->
+        <h3>Select Payment Method</h3>
+        <div class="payment-options">
+            <button id="cash-on-delivery" class="button">Cash on Delivery</button>
+            <button id="credit-debit" class="button">Credit or Debit Card</button>
+            <button id="upi-apps" class="button">UPI Apps</button>
+        </div>
+    </div>
+
+</body>
+</html>

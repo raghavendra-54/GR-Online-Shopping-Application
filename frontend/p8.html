@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #EFDEDE, #B2B5FB);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px;
+            background-color: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .back-arrow {
+            font-size: 28px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #333;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .back-arrow:hover {
+            transform: translateX(-5px);
+            color: #B2B5FB;
+        }
+        .image-container {
+            width: 80px;
+            height: 80px;
+            margin: 20px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: zoomIn 1s ease-in-out;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .button {
+            background-color: #D9D9D9;
+            color: black;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 300px;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .button:hover {
+            background-color: #C0C0C0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .button.primary {
+            background-color: #B2B5FB;
+            color: white;
+        }
+        .button.primary:hover {
+            background-color: #9A9DFA;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        function navigateBack() {
+            window.location.href = 'p1.html';
+        }
+    </script>
+</head>
+<body>
+
+    <div class="back-arrow" onclick="navigateBack()">&#8592;</div>
+    <div class="container">
+        <div class="image-container">
+            <img src="C:\Users\Raghavendra\Downloads\avatar.png" alt="Profile Image">
+        </div>
+        <button class="button" onclick="navigateTo('account.html')">Account</button>
+        <button class="button" onclick="navigateTo('your-orders.html')">Your Orders</button>
+        <button class="button" onclick="navigateTo('payment-history.html')">Payment History</button>
+        <button class="button" onclick="navigateTo('return-delivery.html')">Return Delivery</button>
+        <button class="button" onclick="navigateTo('order-track.html')">Order Track</button>
+        <button class="button primary" onclick="navigateTo('log-out.html')">Log Out</button>
+    </div>
+
+</body>
+</html>
