@@ -1,7 +1,7 @@
 // Authentication utilities
 class AuthService {
     constructor() {
-        this.baseURL = 'http://localhost:5000/api';
+        this.baseURL = '/api';
         this.token = localStorage.getItem('authToken');
     }
 

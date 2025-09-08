@@ -20,7 +20,9 @@
             font-size: 24px;
             font-weight: bold;
             margin-bottom: 20px;
-            animation: slide 10s linear infinite;
+            animation: slide 15s linear infinite;
+            white-space: nowrap;
+            overflow: hidden;
         }
         @keyframes slide {
             0% { transform: translateX(100%); }
@@ -28,23 +30,27 @@
         }
         .login-container {
             background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
             text-align: center;
             animation: fadeIn 1s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .login-container img {
-            width: 100%;
-            max-width: 400px;
+        .hero-image {
+            width: 100px;
+            height: 100px;
             border-radius: 12px;
             margin-bottom: 20px;
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         .form-group {
             margin-bottom: 20px;
@@ -66,6 +72,7 @@
         }
         .form-group input:focus {
             border-color: #6a11cb;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
             outline: none;
         }
         .form-group .additional-info {
@@ -90,7 +97,9 @@
             transition: background 0.3s ease;
         }
         .form-group button:hover {
-            background: #2575fc;
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
         }
     </style>
 </head>
@@ -98,9 +107,9 @@
     <div class="login-container">
         <!-- Shopping Image -->
         <div class="marquee-text">
-            **Welcome to Rudra Shopping**
+            ✨ Welcome to Rudra Tailoring Shop ✨
         </div>
-        <img src="C:\Users\Raghavendra\OneDrive\Pictures\SR.jpg" alt="Shopping Image">
+        <img src="https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Tailoring" class="hero-image">
         <form class="login-form">
             <div class="form-group">
                 <label for="username">Username:</label>

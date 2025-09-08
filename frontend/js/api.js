@@ -1,7 +1,7 @@
 // API service for handling all API calls
 class APIService {
     constructor() {
-        this.baseURL = 'http://localhost:5000/api';
+        this.baseURL = '/api';
     }
 
     // Get products
